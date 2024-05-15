@@ -1,6 +1,7 @@
 package com.group6;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Test {
 
@@ -13,25 +14,56 @@ public class Test {
         RandomForest forest = new RandomForest(100);
         //forest.print(); //prints the tree objects
 
-        String input = "28,male,,Instagram,Sports,Australia,Sub_Urban,Marketer Manager,10223,True,False,True"; 
-        DataContainer userInput = new DataContainer(input); 
+        // Scanner scanner = new Scanner(System.in);
+        // String[] inputs = new String[]{
+        //     "your age", 
+        //     "your gender", 
+        //     "your hours spent on social media", 
+        //     "your favorite social media platform", 
+        //     "your interest", 
+        //     "your location", 
+        //     "your demographic (Urban, Sub_Urban, Rural)", 
+        //     "your profession", 
+        //     "your monthly income", 
+        //     "if you are in debt", 
+        //     "if you are a homeowner",
+        //     "if you own a car"
+        // };
+        // String[] userInputs = new String[inputs.length];
+
+        // for (int i = 0; i < inputs.length; i++) {
+        //     System.out.println("Enter your " + inputs[i]);
+        //     userInputs[i] = scanner.nextLine();
+        // }
+        // String userInputString = userInputs[0] + "," + userInputs[1] + "," + userInputs[2] + "," + userInputs[3] + "," + userInputs[4] + "," + userInputs[5] + "," + userInputs[6] + "," + userInputs[7] + "," + userInputs[8] + "," + userInputs[9] + "," + userInputs[10] + ",True";
+        // scanner.close();
+
+        String userInputString = args[0];
+        // System.out.println(userInputString);
+
+
+        
+
+
+        // String input = "28,male,4,Instagram,Sports,Australia,Sub_Urban,Marketer Manager,10223,True,False,True"; 
+        DataContainer userInput = new DataContainer(userInputString); 
 
         //NOTE AT THIS TIME I AM JUST COLLECTING THE ARRAY OF PREDICTIONS SO THAT WE CAN SEE HOW IT CHANGES WITH DIFFERENT INPUTS
         int[] prediction = forest.aggregate(userInput);
         int label0 = 0, label1 = 0;
         
-        System.out.println("Prediction array is: ");
-        System.out.print("[");
+        // System.out.println("Prediction array is: ");
+        // System.out.print("[");
         for (int i = 0; i < prediction.length - 1; i++) {
-            System.out.print(prediction[i] + ", ");
+            // System.out.print(prediction[i] + ", ");
             if (prediction[i] == 1) label1++;
             else label0++;
         }
-        System.out.println(prediction[99] + "]");
-        System.out.println("Label0 count = " + label0);
-        System.out.println("Label1 count = " + label1);
+        // System.out.println(prediction[99] + "]");
+        int confidence = Math.max(label0, label1); //confidence level (0-1
         if (label0 > label1) System.out.println("NO ADDICTION");
         else System.out.println("YES ADDICTION");
+        System.out.println("Confidence level: " + confidence + "%");
 
  
     //tree testing  ---------------------------------------------------
